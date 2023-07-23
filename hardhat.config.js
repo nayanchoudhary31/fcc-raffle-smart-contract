@@ -18,6 +18,10 @@ module.exports = {
       blockConfirmations: 6,
       gas: 6000000,
     },
+    hardhat: {
+      chainId: 31337,
+      blockConfirmations: 1,
+    },
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,
       accounts: [process.env.PRIVATE_KEY],
