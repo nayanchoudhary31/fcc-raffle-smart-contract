@@ -25,11 +25,6 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     const transactionResponse = await vrfcoordinatorV2Mock.createSubscription();
     const transactionRecipt = await transactionResponse.wait(1);
     subscriptionId = transactionRecipt.events[0].args.subId;
-    console.log(
-      "🚀 ~ file: 01-deploy-raffle.js:28 ~ subscriptionId:",
-      subscriptionId.toString()
-    );
-    console.log("FUND_AMOUNT", VRF_FUND_AMOUNT.toString());
 
     await vrfcoordinatorV2Mock.fundSubscription(
       subscriptionId,
