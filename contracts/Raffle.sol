@@ -53,7 +53,6 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatible {
         bytes32 _keyHash,
         uint64 _subscriptionId,
         uint32 _callbackGasLimit,
-        uint256 _lastTimeStamp,
         uint256 _interval
     ) VRFConsumerBaseV2(_vrfCoordinatorV2) {
         s_entranceFee = _entranceFee;
@@ -63,7 +62,7 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatible {
         i_callbackGasLimit = _callbackGasLimit;
         s_raffleState = RaffleState.OPEN;
         i_interval = _interval;
-        s_lastTimeStamp = _lastTimeStamp;
+        s_lastTimeStamp = block.timestamp;
     }
 
     function enterRaffle() public payable {
