@@ -125,7 +125,7 @@ const { assert, expect } = require("chai");
         });
 
         it("should revert if isUpKeedNeed is false", async function () {
-          await expect(await raffle.performUpkeep([])).to.be.revertedWith(
+          await expect(raffle.performUpkeep([])).to.be.revertedWith(
             "Raffle__UpkeepNotNeeded"
           );
         });
