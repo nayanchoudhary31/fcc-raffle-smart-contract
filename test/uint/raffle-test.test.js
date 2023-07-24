@@ -144,4 +144,41 @@ const { assert, expect } = require("chai");
           assert(requestId > 0);
         });
       });
+
+      describe("FulfillRandomWords", async function () {
+        beforeEach(async function () {
+          // One player should be in raffle
+          await raffle.enterRaffle({ value: raffleEntranceFee });
+          // Interval should be passed
+          await network.provider.send("evm_increaseTime", [
+            interval.toNumber() + 1,
+          ]);
+          await network.provider.send("evm_mine", []);
+        });
+        it("should not be called before running performUpKeep", async function () {
+          await expect(
+            vrfCoordinatorV2Mock.fulfillRandomWords(0, raffle.address)
+          ).to.be.revertedWith("nonexistent request");
+          await expect(
+            vrfCoordinatorV2Mock.fulfillRandomWords(1, raffle.address)
+          ).to.be.revertedWith("nonexistent request");
+        });
+
+        it("pick winner, reset the lottery and send money", async function () {
+          const accounts = await ethers.getSigners();
+          const additionalEntrants = 3;
+          const startAccountIndex = 1; // 0-> Deloyer
+
+          for (
+            let j = startAccountIndex;
+            j < startAccountIndex + additionalEntrants;
+            j++
+          ) {
+            const connectedAccountRaffle = raffle.connect(accounts[j]);
+            await connectedAccountRaffle.enterRaffle({
+              value: raffleEntranceFee,
+            });
+          }
+        });
+      });
     });
