@@ -35,7 +35,7 @@ const { assert, expect } = require("chai");
         });
       });
 
-      describe("Raffle Testcase", async function () {
+      describe("Raffle Testcases", async function () {
         it("should not allow to enter raffle if dont pay sufficient amount", async function () {
           await expect(raffle.enterRaffle()).to.be.revertedWith(
             "Raffle__NotEnoughETHToPlayLottery"
