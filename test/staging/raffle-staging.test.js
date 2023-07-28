@@ -17,7 +17,7 @@ developmentChains.includes(network.name)
           // Get the accounts
           const accounts = await ethers.getSigners();
           const getStartingTimeStamp = await raffle.getLastTimeStamp();
-          console.log(`Setting up the event listeners...`);
+          console.log(`Setting up the event listeners......`);
 
           await new Promise(async (resolve, reject) => {
             raffle.once("WinnerPicked", async () => {
